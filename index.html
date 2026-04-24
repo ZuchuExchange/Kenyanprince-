@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KP VIP | Secure Your Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kp-gold: #FFD700;
+            --royal-gold: #C5A021;
+            --deep-black: #080808;
+            --glass: rgba(18, 18, 18, 0.9);
+            --error: #FF3B3B;
+            --success: #00FF88;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.88), rgba(0,0,0,0.88)), url('kp.jpg'), #0f0f0f;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 800px;
+        }
+
+        .badge {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--kp-gold);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid var(--kp-gold);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            background: linear-gradient(to bottom, #fff 30%, var(--kp-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-text {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        /* The VIP Card */
+        .main-card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            width: 95%;
+            max-width: 550px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(45deg, transparent, var(--kp-gold), transparent);
+            border-radius: 32px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Perks List */
+        .perks {
+            margin-bottom: 40px;
+        }
+
+        .perk-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .icon-circle {
+            min-width: 50px;
+            height: 50px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .perk-content h3 {
+            font-size: 1.1rem;
+            color: var(--kp-gold);
+            margin-bottom: 5px;
+        }
+
+        .perk-content p {
+            font-size: 0.9rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        /* Interaction Zone */
+        .action-zone {
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .price-banner {
+            margin-bottom: 25px;
+        }
+
+        .price-banner .small { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .price-banner .big { font-size: 2.5rem; font-weight: 800; color: #fff; }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 0.75rem;
+            color: var(--kp-gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+            padding-left: 5px;
+        }
+
+        input {
+            width: 100%;
+            background: #000;
+            border: 2px solid #222;
+            padding: 18px;
+            border-radius: 16px;
+            color: #fff;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--kp-gold); background: #0a0a0a; }
+
+        #err-text {
+            color: var(--error);
+            font-size: 0.8rem;
+            margin-top: 10px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .btn-join {
+            width: 100%;
+            padding: 22px;
+            border-radius: 16px;
+            border: none;
+            background: #222;
+            color: #555;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: not-allowed;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn-join.valid {
+            background: linear-gradient(135deg, var(--kp-gold), var(--royal-gold));
+            color: #000;
+            cursor: pointer;
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.25);
+        }
+
+        .btn-join.valid:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Footer Quote */
+        footer {
+            margin: 60px 0 40px;
+            text-align: center;
+        }
+
+        .motto {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 8px;
+            color: rgba(255,255,255,0.1);
+            margin-bottom: 10px;
+            user-select: none;
+        }
+
+        .copy {
+            font-size: 0.7rem;
+            color: #444;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 480px) {
+            .main-card { padding: 25px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="badge">KENYAN PRINCE</div>
+        <h1>Trading Signals WhatsApp Group</h1>
+        <p class="intro-text">Are you a young Kenyan Trader? Join my live signals WhatsApp group and start making profits today. Most people fail because they wait for certainty. In the market, certainty is a myth. Profit belongs to the brave and risk takers. Join me <b>The Kenyan Prince</b> and the KP Elite to stop gambling and start executing.</p>
+    </section>
+
+    <div class="main-card">
+        <div class="perks">
+            <div class="perk-row">
+                <div class="icon-circle">🎯</div>
+                <div class="perk-content">
+                    <h3>Precision Signals</h3>
+                    <p>Clean chart setups for Gold & FX. We tell you exactly where to enter and where to take your profit.</p>
+                </div>
+            </div>
+            <div class="perk-row">
+                <div class="icon-circle">👑</div>
+                <div class="perk-content">
+                    <h3>The KP Direct Chat</h3>
+                    <p>Unlock a 24/7 direct WhatsApp one on one chat with me. Real-time market updates and psychological coaching to keep you disciplined.</p>
+                </div>
+            </div>
+            <div class="perk-row">
+                <div class="icon-circle">⚡</div>
+                <div class="perk-content">
+                    <h3>Instant Automation</h3>
+                    <p>No waiting in line. Once you pay the Ksh 100 commitment, your WhatsApp number is automatically added into the VIP channel immediately.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-zone">
+            <div class="price-banner">
+                <p class="small">Lifetime VIP Access</p>
+                <p class="big">Ksh 100</p>
+            </div>
+
+            <div class="form-group">
+                <label>WHATSAPP NUMBER</label>
+                <input type="tel" id="phoneInput" placeholder="07/01xx xxx xxx" maxlength="10">
+                <p id="err-text">Invalid Format! Start with 07 or 01</p>
+            </div>
+
+            <button id="finalBtn" class="btn-join">Join Now</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="motto">NO RISK, NO FERRARI</div>
+        <p class="copy">KenyanPrince 2026 &copy; All Rights Reserved</p>
+    </footer>
+
+    <script>
+        const phoneInput = document.getElementById('phoneInput');
+        const errText = document.getElementById('err-text');
+        const finalBtn = document.getElementById('finalBtn');
+
+        // Monitor input for validation
+        phoneInput.addEventListener('input', function() {
+            const regex = /^(07|01)\d{8}$/;
+            const val = this.value;
+
+            if (val === "") {
+                errText.style.display = "none";
+                finalBtn.classList.remove('valid');
+            } else if (regex.test(val)) {
+                errText.style.display = "none";
+                finalBtn.classList.add('valid');
+            } else {
+                errText.style.display = "block";
+                finalBtn.classList.remove('valid');
+            }
+        });
+
+        // Handle Click Event
+        finalBtn.addEventListener('click', function() {
+            // Check if validation has passed (button has 'valid' class)
+            if (this.classList.contains('valid')) {
+                const numberValue = phoneInput.value;
+                
+                // Save the number to local storage
+                localStorage.setItem('number', numberValue);
+                
+                // Redirect to next page
+                window.location.href = 'index2.html';
+            }
+        });
+    </script>
+</body>
+  </html>
